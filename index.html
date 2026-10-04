@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>R1.13 - TP3 Serveur web Apache</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect x=%2716%27 y=%2710%27 width=%2768%27 height=%2780%27 rx=%278%27 fill=%27%231c2333%27/%3E%3Crect x=%2726%27 y=%2722%27 width=%2748%27 height=%2712%27 rx=%273%27 fill=%27%23dd4814%27/%3E%3Crect x=%2726%27 y=%2742%27 width=%2748%27 height=%2712%27 rx=%273%27 fill=%27%232f5fd9%27/%3E%3Ccircle cx=%2734%27 cy=%2772%27 r=%276%27 fill=%27%236ee7a8%27/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-page="index">
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <header class="site-header">
+      <nav class="nav-wrap">
+        <a class="brand" href="index.html"
+          ><img src="img/logo_iut.jpg" alt="" />
+          <span
+            >R1.13 - Hébergement
+            <small>TP3 · Serveur web Apache</small></span
+          ><img src="img/logo_mmi.jpg" alt="" />
+        </a>
+        <div class="site-nav">
+          <a href="index.html" data-nav="index">Accueil</a>
+          <a href="tp.html" data-nav="tp">TP</a>
+          <a href="livrable.html" data-nav="livrable">Livrable</a>
+          <a href="memo.html" data-nav="memo">Mémo</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="contenu">
+      <p class="eyebrow">TP3 - BUT MMI 1 · R1.13 Hébergement</p>
+      <h1>Serveur web Apache</h1>
+      <p class="lede">
+        Dans un contexte professionnel moderne (DevOps), il est rare d'avoir un
+        accès physique au serveur : on administre des machines distantes via un
+        terminal. Puisque nous ne pouvons pas installer de serveur sur les
+        postes de la salle, nous allons utiliser un environnement « bac à
+        sable » (sandbox) en ligne : une machine Linux (Ubuntu) temporaire,
+        hébergée dans le cloud, dont vous serez l'administrateur.
+      </p>
+
+      <h2>Objectifs</h2>
+      <div class="grid cols-3">
+        <div class="card"><h3>🖥️ Terminal distant</h3><p>Prendre en main un terminal Linux distant.</p></div>
+        <div class="card"><h3>⚙️ Service Apache2</h3><p>Installer et piloter le service Apache2.</p></div>
+        <div class="card"><h3>🔌 Ports</h3><p>Comprendre l'exposition des ports (accéder au site web).</p></div>
+        <div class="card"><h3>🔐 Permissions</h3><p>Gérer les permissions de fichiers en ligne de commande.</p></div>
+        <div class="card"><h3>🔗 Alias et logs</h3><p>Configurer un alias et analyser les journaux (logs).</p></div>
+        <div class="card"><h3>🛡️ Sécurité et UX</h3><p>Sécuriser un dossier et personnaliser la page d'erreur 404.</p></div>
+      </div>
+
+      <h2>Déroulé du TP</h2>
+      <ul class="timeline">
+        <li><span><strong>1. Prise en main de l'environnement</strong> (10 min) - Connexion à Killercoda, premier contact avec le terminal.</span></li>
+        <li><span><strong>2. Installation du service web</strong> (15 min) - <code>apt</code>, <code>systemctl</code>. Questions Q1 et Q2.</span></li>
+        <li><span><strong>3. Accéder à votre site web</strong> (15 min) - Exposition du port 80. Question Q3.</span></li>
+        <li><span><strong>4. Modification de contenu et droits</strong> (15 min) - Utilisateur, <code>chown</code>, <code>nano</code>. Questions Q4 et Q5.</span></li>
+        <li><span><strong>5. Création d'un alias</strong> (20 min) - Configuration Apache, <code>a2enconf</code>. Question Q6.</span></li>
+        <li><span><strong>6. Logs et diagnostic</strong> (10 min) - <code>tail -f</code> sur le journal d'accès. Question Q7.</span></li>
+        <li><span><strong>7. Sécuriser un dossier</strong> (20 min) - Authentification Basic avec <code>.htaccess</code>.</span></li>
+        <li><span><strong>8. Personnalisation des erreurs</strong> (15 min) - Page 404 sur mesure.</span></li>
+        <li><span><strong>Livrable</strong> (10 min) - Réponses Q1 à Q7 et captures, réunies dans un compte rendu PDF à déposer sur Moodle.</span></li>
+      </ul>
+
+      <h2>Deux terminaux, deux usages</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>☁️ Killercoda : le vrai serveur</h3>
+          <p>
+            Le TP se fait sur une vraie machine Ubuntu en ligne :
+            <a class="etape-lien" href="https://killercoda.com/playgrounds/scenario/ubuntu" target="_blank" rel="noopener">killercoda.com</a>.
+            C'est là que vous prenez les captures du livrable.
+          </p>
+        </div>
+        <div class="card">
+          <h3>🧪 Le bac à sable du site</h3>
+          <p>
+            À côté des consignes, un terminal et un navigateur <em>simulés</em>
+            reproduisent l'environnement pour s'entraîner, comprendre une
+            erreur ou rattraper une machine expirée. Chaque étape réussie se
+            coche toute seule.
+          </p>
+        </div>
+      </div>
+
+      <details class="callout" style="margin-top: 2rem">
+        <summary><strong>Descriptif de la ressource R1.13 Hébergement</strong></summary>
+        <p>
+          Objectif : comprendre le fonctionnement général d'internet et
+          initier à l'administration de serveurs en gérant son poste de
+          travail :
+        </p>
+        <ul>
+          <li>Présentation de l'architecture de différents matériels (ordinateurs, tablettes, téléphones...) et découverte de ces éléments au travers des outils et interfaces des différents OS ;</li>
+          <li>Découverte des systèmes d'exploitation (processus, système de fichiers, comptes et permissions, lignes de commande) ;</li>
+          <li>Présentation d'Internet (historique, acteurs, normalisation) et de son fonctionnement (adressage, routage) ;</li>
+          <li>Les applications sur Internet : modèle client/serveur, notion de ports (DNS, HTTP), expérimentation et visualisation des échanges via les outils de développement des navigateurs ;</li>
+          <li>Installation et configuration d'un serveur Web local (gestion du service, fichiers de traces, permissions, alias...) ;</li>
+          <li>Utilisation de serveurs distants : client FTP, client SSH ;</li>
+          <li>Déploiement d'un site Web sur un serveur Web préconfiguré.</li>
+        </ul>
+        <p>TP : Nicolas MAURIN</p>
+      </details>
+
+      <p style="text-align: center; margin-top: 2rem">
+        <a class="btn" href="tp.html">Commencer le TP &rarr;</a>
+      </p>
+    </main>
+
+    <footer class="site-footer">
+      R1.13 Hébergement - BUT MMI 1 · IUT de Béziers · TP3 Serveur web
+      Apache
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,2035 @@
+/* ============================================================
+   R1.13 - TP3 Serveur web Apache
+   Feuille de style partagée par toutes les pages
+   ============================================================ */
+
+:root {
+  --bg: #f7f8fb;
+  --bg-alt: #ffffff;
+  --text: #1c2333;
+  --text-muted: #5b6478;
+  --border: #e1e4ec;
+  --primary: #2f5fd9;
+  --primary-dark: #1f3f9e;
+  --primary-bg: #eaf0ff;
+  --accent-a: #2f7fd9;
+  --accent-a-bg: #e7f1ff;
+  --accent-b: #b5560f;
+  --accent-b-bg: #fdeee0;
+  --ok: #1f8a55;
+  --ok-bg: #e5f6ec;
+  --warn: #b8871a;
+  --warn-bg: #fbf1dc;
+  --danger: #c23b3b;
+  --danger-bg: #fbe8e8;
+  --code-bg: #eef0f6;
+  --shadow: 0 1px 2px rgba(20, 25, 40, 0.04), 0 6px 20px rgba(20, 25, 40, 0.06);
+  --radius: 12px;
+  font-size: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12141c;
+    --bg-alt: #1a1d29;
+    --text: #e7e9f2;
+    --text-muted: #a2a8bd;
+    --border: #2a2e3d;
+    --primary: #6f93ef;
+    --primary-dark: #a9c0f7;
+    --primary-bg: #1c2740;
+    --accent-a: #6fa8ef;
+    --accent-a-bg: #17263d;
+    --accent-b: #e0955a;
+    --accent-b-bg: #3a2716;
+    --ok: #55c98a;
+    --ok-bg: #113524;
+    --warn: #e3b955;
+    --warn-bg: #3a2f10;
+    --danger: #e37272;
+    --danger-bg: #3a1a1a;
+    --code-bg: #20232f;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.35);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  line-height: 1.55;
+}
+
+a {
+  color: var(--primary);
+}
+a:hover {
+  color: var(--primary-dark);
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--primary);
+  color: #fff;
+  padding: 0.5em 1em;
+  z-index: 100;
+}
+.skip-link:focus {
+  left: 0.5em;
+  top: 0.5em;
+}
+
+/* ---------- Layout ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.brand small {
+  display: block;
+  font-weight: 400;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-left: auto;
+}
+
+.site-nav a {
+  text-decoration: none;
+  color: var(--text-muted);
+  padding: 0.45rem 0.7rem;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+.site-nav a:hover {
+  background: var(--primary-bg);
+  color: var(--primary-dark);
+}
+.site-nav a.active {
+  background: var(--primary);
+  color: #fff;
+}
+
+main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 1.5rem 1rem 2.5rem;
+}
+
+/* ---------- Typography blocks ---------- */
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0 0 0.4rem;
+}
+
+h1 {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  margin: 0 0 0.5rem;
+}
+h2 {
+  font-size: 1.35rem;
+  margin: 2.2rem 0 0.8rem;
+}
+h3 {
+  font-size: 1.08rem;
+  margin: 1.4rem 0 0.5rem;
+}
+
+.lede {
+  font-size: 1.08rem;
+  color: var(--text-muted);
+  max-width: 80ch;
+}
+
+/* Texte courant justifie. Les paragraphes n'ayant pas tous la meme longueur
+   de ligne, le bord droit en dents de scie donnait l'impression d'un texte
+   coupe au hasard. La cesure automatique (<html lang="fr">) evite les
+   espaces beantes que la justification produit sinon en francais. */
+main p,
+main .scenario-body li {
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* Sous cette largeur, les lignes sont trop courtes : justifier y creuserait
+   des rivieres blanches au milieu du texte. */
+@media (max-width: 700px) {
+  main p,
+  main .scenario-body li {
+    text-align: left;
+    hyphens: manual;
+  }
+}
+
+.pill {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: var(--primary-bg);
+  color: var(--primary-dark);
+}
+
+code,
+pre,
+kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88em;
+}
+code {
+  background: var(--code-bg);
+  padding: 0.12em 0.4em;
+  border-radius: 5px;
+}
+pre {
+  background: var(--code-bg);
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius);
+  overflow-x: auto;
+}
+pre code {
+  background: none;
+  padding: 0;
+}
+kbd {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 0.05em 0.45em;
+}
+
+/* ---------- Cards / grid ---------- */
+
+.card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.25rem 1.4rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+.grid.cols-2 {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.grid.cols-3 {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+.timeline li {
+  padding: 0.65rem 0.9rem;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+/* ---------- Scenario cards ---------- */
+
+.scenario-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  position: sticky;
+  top: 3.6rem;
+  z-index: 10;
+}
+
+.progress-text {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  margin-left: auto;
+}
+
+.scenario {
+  margin-bottom: 1.4rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.scenario-head {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.1rem 1.3rem;
+  cursor: pointer;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.scenario-head:hover {
+  border-color: var(--primary);
+}
+.scenario.open .scenario-head {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.scenario-check {
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: var(--ok);
+  flex: none;
+}
+
+.scenario-num {
+  flex: none;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  background: var(--primary-bg);
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+.scenario.done .scenario-num {
+  background: var(--ok-bg);
+  color: var(--ok);
+}
+
+.scenario-head h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  flex: 1;
+}
+.scenario-meta {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.scenario-caret {
+  transition: transform 0.15s ease;
+  color: var(--text-muted);
+}
+.scenario.open .scenario-caret {
+  transform: rotate(90deg);
+}
+
+.scenario-body {
+  display: none;
+  border: 1px solid var(--border);
+  border-top: none;
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+  padding: 1.3rem;
+  background: var(--bg);
+}
+.scenario.open .scenario-body {
+  display: block;
+}
+
+.info-block {
+  margin-top: 1rem;
+}
+.info-block h4 {
+  margin: 0 0 0.4rem;
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+.info-block ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.info-block li {
+  margin-bottom: 0.35rem;
+}
+
+.pieges-block {
+  background: var(--warn-bg);
+  border: 1px solid color-mix(in srgb, var(--warn) 35%, var(--border));
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+}
+.pieges-block h4 {
+  color: var(--warn);
+}
+.interdit-block {
+  background: var(--danger-bg);
+  border: 1px solid color-mix(in srgb, var(--danger) 35%, var(--border));
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 1.1rem;
+}
+.interdit-block h4 {
+  color: var(--danger);
+}
+.verif-block {
+  background: var(--ok-bg);
+  border: 1px solid color-mix(in srgb, var(--ok) 35%, var(--border));
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+}
+.verif-block h4 {
+  color: var(--ok);
+}
+
+.commandes-block code {
+  display: inline-block;
+  margin: 0.15rem 0.3rem 0.15rem 0;
+}
+
+/* ---------- Captures d'écran des étapes ---------- */
+
+.etape-figure {
+  margin: 0.5rem 0 0.9rem;
+}
+.etape-figure img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-alt);
+}
+
+/* ---------- Bouton d'aide + fenêtre modale ---------- */
+
+.popup-btn {
+  border: 1px solid var(--primary);
+  background: var(--primary-bg);
+  color: var(--primary-dark);
+  border-radius: 999px;
+  padding: 0.1rem 0.7rem;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.popup-btn:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Lien externe posé dans une étape (formulaire d'inscription, dépôt...).
+   Même gabarit que le bouton de pop-up, mais plein, pour qu'on comprenne
+   qu'il fait quitter la page. */
+.etape-lien {
+  display: inline-block;
+  border: 1px solid var(--primary);
+  background: var(--primary);
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.1rem 0.7rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.etape-lien:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  color: #fff;
+}
+.etape-lien::after {
+  content: ' \2197';
+  font-weight: 400;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(12, 15, 25, 0.55);
+}
+.modal-overlay[hidden] {
+  display: none;
+}
+.modal {
+  position: relative;
+  width: min(680px, 100%);
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 1.6rem 1.8rem;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.modal h3 {
+  margin: 0 0 0.8rem;
+  padding-right: 2rem;
+}
+.modal h4 {
+  margin: 1.2rem 0 0.4rem;
+}
+.modal ul {
+  padding-left: 1.2rem;
+}
+.modal li {
+  margin-bottom: 0.4rem;
+}
+.modal-close {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.9rem;
+  border: 0;
+  background: none;
+  color: var(--text-muted);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.modal-close:hover {
+  color: var(--text);
+}
+
+.popup-table {
+  width: 100%;
+  margin: 0.8rem 0;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.popup-table th,
+.popup-table td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.7rem;
+  text-align: left;
+  vertical-align: top;
+  font-size: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+}
+.popup-table thead th {
+  background: var(--primary-bg);
+  color: var(--primary-dark);
+}
+.popup-table tbody th {
+  background: var(--bg);
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ---------- Tables (memo) ---------- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+th,
+td {
+  text-align: left;
+  padding: 0.55rem 0.7rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+th {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* ---------- Misc ---------- */
+
+.callout {
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  margin: 1.2rem 0;
+}
+.callout.warn {
+  background: var(--warn-bg);
+  border-color: color-mix(in srgb, var(--warn) 35%, var(--border));
+}
+.callout.ok {
+  background: var(--ok-bg);
+  border-color: color-mix(in srgb, var(--ok) 35%, var(--border));
+}
+.callout.danger {
+  background: var(--danger-bg);
+  border-color: color-mix(in srgb, var(--danger) 35%, var(--border));
+}
+.callout h3,
+.callout h4 {
+  margin-top: 0;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff;
+  text-decoration: none;
+  padding: 0.6rem 1.1rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  border: none;
+  cursor: pointer;
+}
+.btn:hover {
+  background: var(--primary-dark);
+  color: #fff;
+}
+.btn.secondary {
+  background: var(--bg-alt);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* L'image porte deja son propre fond : un cadre autour ferait doublon. */
+.diagram {
+  margin: 1.5rem 0;
+}
+
+/* 'display: grid' l'emporterait sinon sur le 'display: none' que le
+   navigateur associe a l'attribut hidden. */
+.grid[hidden] {
+  display: none;
+}
+.diagram img {
+  display: block;
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+footer a {
+  color: inherit;
+}
+
+/* ============================================================
+   Ajouts propres au TP web-mmi2
+   ============================================================ */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.brand img {
+  height: 34px;
+  width: auto;
+  border-radius: 6px;
+  background: #fff;
+  padding: 2px 4px;
+}
+/* Le logo MMI est carre : a hauteur egale il paraitrait plus petit que
+   celui de l'IUT, tout en largeur. */
+.brand img[src$='logo_mmi.jpg'] {
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+}
+@media (max-width: 480px) {
+  .brand {
+    white-space: normal;
+    gap: 0.45rem;
+  }
+  .brand img {
+    height: 28px;
+  }
+  .brand img[src$='logo_mmi.jpg'] {
+    height: 36px;
+  }
+}
+
+/* ---------- Barre de progression globale ---------- */
+
+.progress {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--border);
+  overflow: hidden;
+  flex: 1;
+  min-width: 120px;
+}
+.progress > span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--primary), var(--ok));
+  transition: width 0.4s ease;
+}
+
+/* ---------- Questions a reponse verifiee ---------- */
+
+.question {
+  margin: 1.1rem 0;
+  padding: 1rem 1.1rem;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  border-radius: 10px;
+}
+.question > .q-titre {
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+.question form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+.question input[type='text'] {
+  font: inherit;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  flex: 1;
+  min-width: 14rem;
+}
+.feedback {
+  margin: 0.6rem 0 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+.feedback.ok {
+  color: var(--ok);
+}
+.feedback.ko {
+  color: var(--danger);
+}
+.question.reussie {
+  border-left-color: var(--ok);
+}
+
+details.indice {
+  margin-top: 0.6rem;
+  font-size: 0.92rem;
+}
+details.indice summary {
+  cursor: pointer;
+  color: var(--warn);
+  font-weight: 600;
+}
+
+/* ---------- Cartes a retourner ---------- */
+
+.flip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0.8rem;
+  margin: 1rem 0;
+}
+.flip {
+  display: block;
+  width: 100%;
+  perspective: 900px;
+  border: 0;
+  padding: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+/* Les deux faces sont empilees dans la meme cellule de grille : la carte
+   prend la hauteur de la face la plus longue, sans hauteur fixe qui
+   couperait un texte long. Les <span> (seuls autorises dans un <button>)
+   doivent etre passes en bloc, sinon ils n'ont ni largeur ni hauteur. */
+.flip-inner {
+  display: grid;
+  height: 100%;
+  min-height: 150px;
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+}
+.flip.retournee .flip-inner {
+  transform: rotateY(180deg);
+}
+.flip-face {
+  grid-area: 1 / 1;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  box-shadow: var(--shadow);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.3rem;
+  line-height: 1.45;
+}
+.flip:hover .flip-face,
+.flip:focus-visible .flip-face {
+  border-color: var(--primary);
+}
+.flip-face:not(.flip-back)::after {
+  content: 'Cliquer pour retourner \21BB';
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--primary);
+}
+.flip-face:not(.flip-back) strong {
+  font-size: 1.05rem;
+}
+.flip-face small {
+  color: var(--text-muted);
+}
+.flip-back {
+  transform: rotateY(180deg);
+  background: var(--primary-bg);
+  font-size: 0.9rem;
+  /* Texte courant avec du <code> et du gras : en flex, chaque morceau
+     deviendrait un bloc a part et passerait a la ligne. */
+  display: block;
+  align-content: center;
+}
+
+/* ---------- Etapes (accordeons) ---------- */
+
+.etape-body > *:first-child {
+  margin-top: 0;
+}
+
+.mission-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.mission-list li {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+.mission-list li::before {
+  content: '\25CB';
+  color: var(--text-muted);
+}
+.mission-list li.faite {
+  color: var(--ok);
+}
+.mission-list li.faite::before {
+  content: '\2714';
+  color: var(--ok);
+}
+
+/* ---------- QCM ---------- */
+
+.qcm fieldset {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-alt);
+  margin: 0 0 0.9rem;
+  padding: 0.9rem 1.1rem;
+}
+.qcm legend {
+  font-weight: 700;
+  padding: 0 0.4rem;
+}
+.qcm label {
+  display: block;
+  padding: 0.3rem 0.4rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.qcm label:hover {
+  background: var(--bg);
+}
+.qcm label.bonne {
+  background: var(--ok-bg);
+  color: var(--ok);
+  font-weight: 600;
+}
+.qcm label.mauvaise {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+.qcm .explication {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.score {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+/* ---------- Checklist d'objectifs ---------- */
+
+.objectifs-check {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+.objectifs-check label {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  padding: 0.7rem 0.9rem;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.objectifs-check input {
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: var(--ok);
+  margin-top: 0.2rem;
+  flex: none;
+}
+.objectifs-check input:checked + span {
+  color: var(--ok);
+}
+
+.bravo {
+  text-align: center;
+  font-size: 1.1rem;
+}
+.bravo[hidden] {
+  display: none;
+}
+
+details.callout summary {
+  cursor: pointer;
+}
+details.callout[open] summary {
+  margin-bottom: 0.5rem;
+}
+a.desactive {
+  opacity: 0.6;
+}
+
+/* ============================================================
+   Ajouts propres au TP1 Système de fichiers
+   ============================================================ */
+
+/* ---------- Terminal simule ---------- */
+
+.terminal {
+  --t-bg: #0f1218;
+  --t-fg: #d7dde8;
+  background: var(--t-bg);
+  color: var(--t-fg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.86rem;
+  border: 1px solid #262b36;
+}
+.terminal-barre {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.7rem;
+  background: #1b2029;
+  color: #9aa3b5;
+  font-size: 0.78rem;
+}
+.terminal-barre .pastille {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: #ff5f57;
+}
+.terminal-barre .pastille:nth-child(2) {
+  background: #febc2e;
+}
+.terminal-barre .pastille:nth-child(3) {
+  background: #28c840;
+}
+.terminal-barre .titre {
+  margin-left: 0.4rem;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.terminal-barre button {
+  font: inherit;
+  font-size: 0.75rem;
+  color: #c9d1e0;
+  background: #2a3140;
+  border: 1px solid #3a4253;
+  border-radius: 6px;
+  padding: 0.1rem 0.55rem;
+  cursor: pointer;
+}
+.terminal-barre button:hover {
+  background: #3a4253;
+}
+.terminal-ecran {
+  height: 340px;
+  overflow-y: auto;
+  padding: 0.7rem 0.8rem;
+  cursor: text;
+  line-height: 1.45;
+}
+.terminal-ecran .ligne {
+  white-space: pre-wrap;
+  word-break: break-all;
+  min-height: 1.2em;
+}
+.terminal .t-prompt-user {
+  color: #6ee7a8;
+}
+.terminal .t-prompt-path {
+  color: #7cb7ff;
+}
+.terminal .t-dir {
+  color: #7cb7ff;
+  font-weight: 700;
+}
+.terminal .t-err {
+  color: #ff8f8f;
+}
+.terminal .t-aide {
+  color: #f5c96b;
+}
+.terminal .t-ok {
+  color: #6ee7a8;
+}
+.terminal .t-dim {
+  color: #8790a3;
+}
+.terminal-saisie {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5ch;
+}
+.terminal-saisie input {
+  flex: 1;
+  min-width: 4ch;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--t-fg);
+  font: inherit;
+  caret-color: #6ee7a8;
+  padding: 0;
+}
+.terminal-aide {
+  padding: 0.45rem 0.8rem 0.6rem;
+  border-top: 1px solid #262b36;
+  color: #8790a3;
+  font-size: 0.75rem;
+}
+.terminal-aide kbd {
+  background: #2a3140;
+  border-color: #3a4253;
+  color: #c9d1e0;
+}
+
+/* Page Manipulation : consignes a gauche, terminal colle a droite. Sur
+   petit ecran, le terminal passe au-dessus des consignes. */
+.atelier {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.4rem;
+  align-items: start;
+}
+.atelier-terminal {
+  position: sticky;
+  top: 4.6rem;
+}
+@media (max-width: 900px) {
+  .atelier {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .atelier-terminal {
+    position: static;
+    order: -1;
+  }
+  .terminal-ecran {
+    height: 260px;
+  }
+}
+
+/* Actions du sujet, cochees automatiquement par le terminal. */
+ol.actions {
+  padding-left: 0;
+  list-style: none;
+  counter-reset: action;
+  display: grid;
+  gap: 0.4rem;
+}
+ol.actions > li {
+  counter-increment: action;
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+  padding: 0.5rem 0.7rem;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+ol.actions > li::before {
+  content: counter(action);
+  flex: none;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: var(--primary-bg);
+  color: var(--primary-dark);
+}
+ol.actions > li.faite {
+  border-color: color-mix(in srgb, var(--ok) 45%, var(--border));
+  background: var(--ok-bg);
+}
+ol.actions > li.faite::before {
+  content: '\2714';
+  background: var(--ok);
+  color: #fff;
+}
+
+/* Question du sujet (Q1 a Q9), a rediger dans la page Livrable. */
+.q-sujet {
+  margin: 1rem 0;
+  padding: 0.9rem 1.1rem;
+  border-left: 4px solid var(--accent-b);
+  background: var(--accent-b-bg);
+  border-radius: 10px;
+}
+.q-sujet .q-num {
+  display: inline-block;
+  margin-right: 0.4rem;
+  padding: 0.05rem 0.55rem;
+  border-radius: 999px;
+  background: var(--accent-b);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.q-sujet p {
+  margin: 0.3rem 0;
+}
+.q-sujet .q-lien {
+  font-size: 0.85rem;
+}
+
+/* ---------- Livrable ---------- */
+
+.reponse {
+  margin: 0 0 1rem;
+  padding: 1rem 1.1rem;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.reponse label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.reponse .rappel {
+  margin: 0 0 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+.reponse textarea {
+  width: 100%;
+  min-height: 4.5rem;
+  font: inherit;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  resize: vertical;
+}
+.reponse.remplie {
+  border-left: 4px solid var(--ok);
+}
+.barre-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+/* ---------- Memo : filtre et copie ---------- */
+
+.filtre {
+  font: inherit;
+  width: 100%;
+  max-width: 420px;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-alt);
+  color: var(--text);
+}
+.table-scroll {
+  overflow-x: auto;
+}
+.copier {
+  font: inherit;
+  font-size: 0.75rem;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-muted);
+  border-radius: 6px;
+  padding: 0.05rem 0.4rem;
+  margin-left: 0.3rem;
+  cursor: pointer;
+  vertical-align: middle;
+}
+.copier:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+tr[hidden] {
+  display: none;
+}
+
+details.callout summary {
+  cursor: pointer;
+}
+details.callout[open] summary {
+  margin-bottom: 0.5rem;
+}
+
+/* ---------- Livrable : identite et captures ---------- */
+
+.identite .reponse {
+  margin: 0;
+}
+.reponse input[type='text'] {
+  width: 100%;
+  font: inherit;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+}
+.capture {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.capture h3 {
+  margin: 0;
+}
+.capture .rappel {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.capture.ok {
+  border-color: color-mix(in srgb, var(--ok) 45%, var(--border));
+}
+.depot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  cursor: pointer;
+  text-align: center;
+  padding: 0.6rem;
+  overflow: hidden;
+}
+.depot:hover,
+.depot.survol,
+.depot:focus-within {
+  border-color: var(--primary);
+  background: var(--primary-bg);
+}
+.depot input[type='file'] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.depot-apercu {
+  max-width: 100%;
+  max-height: 260px;
+  border-radius: 6px;
+}
+.depot-apercu:not([hidden]) + .depot-texte,
+.depot.rempli .depot-texte {
+  display: none;
+}
+.capture-pied {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.88rem;
+}
+.capture-etat {
+  flex: 1;
+  color: var(--text-muted);
+}
+.capture.ok .capture-etat {
+  color: var(--ok);
+  font-weight: 600;
+}
+.capture.erreur .capture-etat {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.reponse input[readonly] {
+  background: var(--code-bg);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+.identite-verrou {
+  margin: 0.8rem 0 0;
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  background: var(--warn-bg);
+  border: 1px solid color-mix(in srgb, var(--warn) 35%, var(--border));
+  font-size: 0.92rem;
+}
+
+/* Reponses non selectionnables (voir js/livrable.js) : meme si une
+   selection apparait un instant, elle reste invisible. */
+.reponse textarea::selection {
+  background: transparent;
+}
+
+/* ---------- Schema client / serveur anime ---------- */
+
+.schema {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin: 1.2rem 0;
+}
+.schema svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.schema-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 0.8rem;
+}
+.schema-legende {
+  min-height: 3em;
+  margin: 0.8rem 0 0;
+  text-align: center;
+  color: var(--text-muted);
+}
+.schema text {
+  fill: var(--text);
+  font-family: inherit;
+}
+.schema .boite {
+  fill: var(--bg);
+  stroke: var(--border);
+  stroke-width: 2;
+}
+.schema .service {
+  stroke-width: 2;
+  transition: opacity 0.3s;
+}
+.schema .service.ftp {
+  fill: var(--accent-b-bg);
+  stroke: var(--accent-b);
+}
+.schema .service.http {
+  fill: var(--accent-a-bg);
+  stroke: var(--accent-a);
+}
+.schema .lien {
+  stroke: var(--border);
+  stroke-width: 3;
+  stroke-dasharray: 6 6;
+}
+.schema .paquet {
+  opacity: 0;
+}
+.schema .actif {
+  filter: drop-shadow(0 0 6px currentColor);
+}
+.btn.ftp {
+  background: var(--accent-b);
+}
+.btn.http {
+  background: var(--accent-a);
+}
+.btn.ftp:hover,
+.btn.http:hover {
+  filter: brightness(0.9);
+}
+
+/* ---------- Decoupage d'URL ---------- */
+
+.url-dissect {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: clamp(0.95rem, 2.4vw, 1.3rem);
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1rem;
+  text-align: center;
+  word-break: break-all;
+}
+.url-dissect span {
+  border-radius: 6px;
+  padding: 0.1em 0.15em;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+.url-dissect span.on,
+.url-dissect span:hover {
+  color: #fff;
+}
+.url-dissect .u-proto.on,
+.url-dissect .u-proto:hover {
+  background: var(--warn);
+}
+.url-dissect .u-hote.on,
+.url-dissect .u-hote:hover {
+  background: var(--primary);
+}
+.url-dissect .u-chemin.on,
+.url-dissect .u-chemin:hover {
+  background: var(--ok);
+}
+.url-explication {
+  min-height: 4.5em;
+  margin-top: 0.8rem;
+}
+
+/* ============================================================
+   Ajouts propres au TP2 Client / serveur et HTTP
+   ============================================================ */
+
+/* ---------- Faux navigateur + outils de developpement ---------- */
+
+.devsim {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: var(--bg-alt);
+  font-size: 0.86rem;
+}
+.devsim-barre {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.55rem 0.7rem;
+  background: var(--code-bg);
+  border-bottom: 1px solid var(--border);
+}
+.devsim-barre form {
+  display: flex;
+  flex: 1;
+  gap: 0.4rem;
+  min-width: 0;
+}
+.devsim-barre input {
+  flex: 1;
+  min-width: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-alt);
+  color: var(--text);
+}
+.devsim-barre .btn {
+  padding: 0.3rem 0.8rem;
+  font-size: 0.82rem;
+}
+.devsim-favoris {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0.45rem 0.7rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.78rem;
+}
+.devsim-favoris button {
+  font: inherit;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--text);
+  padding: 0.1rem 0.6rem;
+  cursor: pointer;
+}
+.devsim-favoris button:hover {
+  border-color: var(--primary);
+}
+.devsim-page {
+  min-height: 120px;
+  padding: 1rem 1.2rem;
+  background: #fff;
+  color: #222;
+  font-family: system-ui, sans-serif;
+}
+.devsim-page h1 {
+  font-size: 1.3rem;
+  margin: 0 0 0.4rem;
+}
+.devsim-page .erreur {
+  color: #b42318;
+}
+.devsim-page button {
+  font: inherit;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  border: 0;
+  background: #b5560f;
+  color: #fff;
+  cursor: pointer;
+}
+.devtools {
+  border-top: 3px solid var(--border);
+  background: var(--bg-alt);
+}
+.devtools-onglets {
+  display: flex;
+  gap: 0.2rem;
+  padding: 0 0.5rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--code-bg);
+  font-size: 0.8rem;
+  overflow-x: auto;
+}
+.devtools-onglets span {
+  padding: 0.4rem 0.7rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.devtools-onglets span.on {
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
+  font-weight: 600;
+}
+.devtools-outils {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.devtools-outils .effacer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+}
+.devtools-outils .effacer:hover,
+.devtools-outils .effacer:focus-visible {
+  border-color: var(--primary);
+  background: var(--primary-bg);
+}
+.devtools-outils .effacer img {
+  width: 18px;
+  height: 18px;
+}
+.devtools-corps {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  min-height: 230px;
+}
+@media (max-width: 760px) {
+  .devtools-corps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.devtools-liste {
+  overflow-x: auto;
+  border-right: 1px solid var(--border);
+}
+.devtools-liste table {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.78rem;
+}
+.devtools-liste th,
+.devtools-liste td {
+  padding: 0.3rem 0.5rem;
+  white-space: nowrap;
+  font-size: 0.76rem;
+}
+.devtools-liste tbody tr {
+  cursor: pointer;
+}
+.devtools-liste tbody tr:hover {
+  background: var(--primary-bg);
+}
+.devtools-liste tbody tr.on {
+  background: var(--primary);
+  color: #fff;
+}
+.devtools-liste tr.e4 td.etat,
+.devtools-liste tr.e5 td.etat {
+  color: var(--danger);
+  font-weight: 700;
+}
+.devtools-liste tr.on td.etat {
+  color: #fff;
+}
+.devtools-vide {
+  padding: 1rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+.devtools-detail {
+  padding: 0.6rem 0.8rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.76rem;
+  overflow-x: auto;
+}
+.devtools-detail details {
+  margin-bottom: 0.5rem;
+}
+.devtools-detail summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-family: system-ui, sans-serif;
+  font-size: 0.82rem;
+  padding: 0.2rem 0;
+}
+.devtools-detail dl {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 0.15rem 0.8rem;
+  margin: 0.3rem 0 0 0.6rem;
+}
+.devtools-detail dt {
+  color: var(--accent-a);
+  font-weight: 600;
+}
+.devtools-detail dd {
+  margin: 0;
+  word-break: break-all;
+}
+.devtools-detail .hl dt,
+.devtools-detail .hl dd {
+  background: var(--warn-bg);
+}
+
+/* ---------- Bareme du livrable ---------- */
+
+.bareme td.pts,
+.bareme th.pts {
+  text-align: right;
+  white-space: nowrap;
+  font-weight: 700;
+}
+.bareme tfoot td {
+  font-weight: 700;
+  border-top: 2px solid var(--border);
+}
+/* Points affiches a cote de l'intitule par le CSS seul : ils ne font pas
+   partie du texte repris comme titre de la question dans le PDF. */
+.reponse label[data-pts]::after,
+.capture h3[data-pts]::after {
+  content: attr(data-pts);
+  margin-left: 0.6rem;
+  padding: 0.05rem 0.55rem;
+  border-radius: 999px;
+  background: var(--accent-b-bg);
+  color: var(--accent-b);
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   Ajouts propres au TP3 Serveur web Apache
+   ============================================================ */
+
+/* ---------- Bac a sable facon Killercoda ---------- */
+
+.bac {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid #262b36;
+  background: #2d2d2d;
+}
+.bac-entete {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0.7rem;
+  background: #000;
+  color: #fff;
+  font-size: 0.8rem;
+}
+.bac-entete strong {
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+.bac-onglets {
+  display: flex;
+  gap: 0.2rem;
+  flex: 1;
+}
+.bac-onglets button,
+.bac-reset {
+  font: inherit;
+  font-size: 0.78rem;
+  color: #c9d1e0;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 0.25rem 0.55rem;
+  cursor: pointer;
+}
+.bac-onglets button[aria-selected='true'] {
+  color: #fff;
+  border-bottom-color: #4fd1e8;
+}
+.bac-reset {
+  border: 1px solid #3a4253;
+  border-radius: 6px;
+}
+.bac-reset:hover,
+.bac-onglets button:hover {
+  color: #fff;
+}
+.bac .terminal {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  position: relative;
+}
+.bac .terminal-ecran {
+  height: 380px;
+}
+.terminal .t-inverse {
+  background: #d7dde8;
+  color: #0f1218;
+}
+.bac-ctrlc {
+  font: inherit;
+  font-size: 0.75rem;
+  background: #c23b3b;
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  padding: 0.1rem 0.6rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+/* Editeur nano */
+.nano {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: #0f1218;
+  z-index: 2;
+}
+.nano[hidden] {
+  display: none;
+}
+.nano-titre {
+  background: #d7dde8;
+  color: #0f1218;
+  text-align: center;
+  font-size: 0.8rem;
+  padding: 0.15rem 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nano textarea {
+  flex: 1;
+  resize: none;
+  border: 0;
+  outline: 0;
+  background: #0f1218;
+  color: #d7dde8;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+  padding: 0.5rem 0.7rem;
+  caret-color: #6ee7a8;
+}
+.nano-statut {
+  min-height: 1.4em;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #f5c96b;
+}
+.nano-pied {
+  display: flex;
+  gap: 1rem;
+  padding: 0.3rem 0.6rem 0.5rem;
+}
+.nano-pied button {
+  font: inherit;
+  font-size: 0.8rem;
+  color: #d7dde8;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.nano-pied b {
+  background: #d7dde8;
+  color: #0f1218;
+  padding: 0 0.2rem;
+  margin-right: 0.2rem;
+}
+
+/* Onglet Traffic / Ports */
+.bac-panneau[data-panneau='web'] {
+  background: var(--bg-alt);
+  min-height: 440px;
+}
+.bac-ports {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.7rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.88rem;
+}
+.bac-ports input {
+  font: inherit;
+  width: 5ch;
+  padding: 0.25rem 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+}
+.bac-ports .btn {
+  padding: 0.3rem 0.8rem;
+  font-size: 0.82rem;
+}
+.bac-ports-aide {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+.bac-url {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-alt);
+  padding: 0 0 0 0.7rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.75rem;
+}
+.bac-hote {
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 55%;
+}
+.bac-url input {
+  flex: 1;
+  min-width: 3rem;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  padding: 0.3rem 0.2rem;
+  outline: 0;
+}
+.bac-url .btn {
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+}
+.bac-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 6px;
+}
+.bac-code.c2 { background: var(--ok-bg); color: var(--ok); }
+.bac-code.c3 { background: var(--primary-bg); color: var(--primary); }
+.bac-code.c4,
+.bac-code.c5 { background: var(--danger-bg); color: var(--danger); }
+.bac-vue {
+  position: relative;
+}
+.bac-vue iframe {
+  display: block;
+  width: 100%;
+  height: 300px;
+  border: 0;
+  background: #fff;
+}
+.bac-auth {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(340px, 92%);
+  padding: 1rem 1.1rem;
+  border-radius: 12px;
+  background: #202124;
+  color: #e8eaed;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  font-size: 0.85rem;
+}
+.bac-auth[hidden] {
+  display: none;
+}
+.bac-auth p {
+  margin: 0 0 0.6rem;
+}
+.bac-auth small {
+  color: #9aa0a6;
+  word-break: break-all;
+}
+.bac-auth label {
+  display: grid;
+  gap: 0.2rem;
+  margin-bottom: 0.5rem;
+}
+.bac-auth input {
+  font: inherit;
+  padding: 0.4rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #5f6368;
+  background: #303134;
+  color: #e8eaed;
+}
+.bac-auth-btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.4rem;
+}
+.bac-web-aide {
+  margin: 0;
+  padding: 0.5rem 0.8rem;
+  background: var(--warn-bg);
+  font-size: 0.85rem;
+}
+
+/* Page TP : consignes a gauche, bac a sable colle a droite. */
+.atelier.tp {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+}
+pre.conf {
+  background: #0f1218;
+  color: #d7dde8;
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.82rem;
+}
+@media (max-width: 900px) {
+  .atelier.tp {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.scenario-body .callout p {
+  margin: 0;
+}

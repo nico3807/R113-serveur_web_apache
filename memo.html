@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mémo - R1.13 TP3</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect x=%2716%27 y=%2710%27 width=%2768%27 height=%2780%27 rx=%278%27 fill=%27%231c2333%27/%3E%3Crect x=%2726%27 y=%2722%27 width=%2748%27 height=%2712%27 rx=%273%27 fill=%27%23dd4814%27/%3E%3Crect x=%2726%27 y=%2742%27 width=%2748%27 height=%2712%27 rx=%273%27 fill=%27%232f5fd9%27/%3E%3Ccircle cx=%2734%27 cy=%2772%27 r=%276%27 fill=%27%236ee7a8%27/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-page="memo">
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <header class="site-header">
+      <nav class="nav-wrap">
+        <a class="brand" href="index.html"
+          ><img src="img/logo_iut.jpg" alt="" />
+          <span
+            >R1.13 - Hébergement
+            <small>TP3 · Serveur web Apache</small></span
+          ><img src="img/logo_mmi.jpg" alt="" />
+        </a>
+        <div class="site-nav">
+          <a href="index.html" data-nav="index">Accueil</a>
+          <a href="tp.html" data-nav="tp">TP</a>
+          <a href="livrable.html" data-nav="livrable">Livrable</a>
+          <a href="memo.html" data-nav="memo">Mémo</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="contenu">
+      <p class="eyebrow">Aide-mémoire</p>
+      <h1>Mémo : administrer Apache en ligne de commande</h1>
+      <p class="lede">
+        Les commandes, fichiers et réflexes du TP, à garder sous la main pour
+        administrer un serveur web Linux.
+      </p>
+
+      <p>
+        <input class="filtre" id="filtre" type="search" placeholder="🔎 Filtrer : apt, chown, alias, log..." aria-label="Filtrer les tableaux" />
+      </p>
+
+      <h2>Paquets et service</h2>
+      <div class="table-scroll">
+        <table data-filtrable>
+          <thead><tr><th>Action</th><th>Commande</th></tr></thead>
+          <tbody>
+            <tr><td>Mettre à jour l'index des paquets</td><td><code data-copie>apt update</code></td></tr>
+            <tr><td>Installer Apache</td><td><code data-copie>apt install apache2</code></td></tr>
+            <tr><td>État du service (quitter avec <kbd>q</kbd>)</td><td><code data-copie>systemctl status apache2</code></td></tr>
+            <tr><td>Relire la configuration sans couper le service</td><td><code data-copie>systemctl reload apache2</code></td></tr>
+            <tr><td>Redémarrer / arrêter / démarrer</td><td><code>systemctl restart|stop|start apache2</code></td></tr>
+            <tr><td>Vérifier la syntaxe de la configuration</td><td><code data-copie>apache2ctl configtest</code></td></tr>
+            <tr><td>Activer / désactiver une configuration</td><td><code data-copie>a2enconf mon_alias</code> · <code>a2disconf mon_alias</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Utilisateurs et droits</h2>
+      <div class="table-scroll">
+        <table data-filtrable>
+          <thead><tr><th>Action</th><th>Commande</th></tr></thead>
+          <tbody>
+            <tr><td>Qui suis-je ?</td><td><code data-copie>whoami</code></td></tr>
+            <tr><td>Créer un utilisateur</td><td><code data-copie>adduser etudiant</code></td></tr>
+            <tr><td>Devenir cet utilisateur (avec son environnement)</td><td><code data-copie>su - etudiant</code></td></tr>
+            <tr><td>Revenir à l'utilisateur précédent (root)</td><td><code data-copie>exit</code></td></tr>
+            <tr><td>Droits d'un dossier lui-même (pas son contenu)</td><td><code data-copie>ls -ld /var/www/html</code></td></tr>
+            <tr><td>Changer le propriétaire (root uniquement)</td><td><code>chown utilisateur chemin</code> · <code>chown -R</code> pour tout le contenu</td></tr>
+            <tr><td>Ajouter le droit « traverser » aux autres</td><td><code>chmod o+x dossier</code></td></tr>
+            <tr><td>Droits classiques d'un site</td><td>dossiers <code>755</code>, fichiers <code>644</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Fichiers et éditeur</h2>
+      <div class="table-scroll">
+        <table data-filtrable>
+          <thead><tr><th>Action</th><th>Commande / raccourci</th></tr></thead>
+          <tbody>
+            <tr><td>Éditer un fichier</td><td><code data-copie>nano /var/www/html/index.html</code></td></tr>
+            <tr><td>nano : enregistrer</td><td><kbd>Ctrl</kbd> + <kbd>O</kbd> puis <kbd>Entrée</kbd></td></tr>
+            <tr><td>nano : quitter</td><td><kbd>Ctrl</kbd> + <kbd>X</kbd></td></tr>
+            <tr><td>Écrire une ligne dans un fichier</td><td><code>echo "&lt;h1&gt;Bonjour&lt;/h1&gt;" &gt; index.html</code></td></tr>
+            <tr><td>Afficher un fichier</td><td><code>cat fichier</code></td></tr>
+            <tr><td>Suivre un journal en direct (arrêt : <kbd>Ctrl</kbd> + <kbd>C</kbd>)</td><td><code data-copie>tail -f /var/log/apache2/access.log</code></td></tr>
+            <tr><td>Créer un fichier de mots de passe</td><td><code>htpasswd -c /etc/apache2/.htpasswd monlogin</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Où sont les fichiers d'Apache ?</h2>
+      <div class="table-scroll">
+        <table data-filtrable>
+          <thead><tr><th>Chemin</th><th>Rôle</th></tr></thead>
+          <tbody>
+            <tr><td><code>/var/www/html/</code></td><td>Racine du site (DocumentRoot) : <code>index.html</code>, pages, dossiers.</td></tr>
+            <tr><td><code>/etc/apache2/apache2.conf</code></td><td>Configuration principale (blocs <code>&lt;Directory&gt;</code>, <code>AllowOverride</code>).</td></tr>
+            <tr><td><code>/etc/apache2/conf-available/</code></td><td>Configurations disponibles (ex : <code>mon_alias.conf</code>), activées par <code>a2enconf</code>.</td></tr>
+            <tr><td><code>/etc/apache2/sites-available/000-default.conf</code></td><td>Site par défaut : bloc <code>&lt;VirtualHost *:80&gt;</code>, <code>ErrorDocument</code>.</td></tr>
+            <tr><td><code>/var/log/apache2/access.log</code></td><td>Journal de toutes les requêtes reçues.</td></tr>
+            <tr><td><code>/var/log/apache2/error.log</code></td><td>Journal des erreurs du serveur.</td></tr>
+            <tr><td><code>.htaccess</code></td><td>Configuration locale d'un dossier (lue si <code>AllowOverride All</code>).</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Lire une ligne du journal d'accès</h2>
+      <pre class="conf"><code>10.244.4.1 - - [04/Oct/2026:18:12:03 +0000] "GET /toto.html HTTP/1.1" 404 492 "-" "Mozilla/5.0 (...)"</code></pre>
+      <div class="table-scroll">
+        <table data-filtrable>
+          <thead><tr><th>Champ</th><th>Signification</th></tr></thead>
+          <tbody>
+            <tr><td><code>10.244.4.1</code></td><td>Adresse IP du client (ici, celle du tunnel Killercoda).</td></tr>
+            <tr><td><code>- -</code></td><td>Identité et utilisateur authentifié (le login apparaît si la page est protégée).</td></tr>
+            <tr><td><code>[04/Oct/2026:...]</code></td><td>Date et heure de la requête.</td></tr>
+            <tr><td><code>"GET /toto.html HTTP/1.1"</code></td><td>Méthode, ressource demandée et version du protocole.</td></tr>
+            <tr><td><code>404</code></td><td>Code de statut renvoyé par le serveur.</td></tr>
+            <tr><td><code>492</code></td><td>Taille de la réponse, en octets.</td></tr>
+            <tr><td><code>"Mozilla/5.0 (...)"</code></td><td>User-Agent : le navigateur et le système du client.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Dépannage</h2>
+      <details class="callout">
+        <summary><strong>Permission denied</strong></summary>
+        <p>L'utilisateur courant n'a pas le droit d'écriture (<code>w</code>) sur le dossier ou le fichier. Vérifie avec <code>whoami</code> et <code>ls -ld</code>, puis corrige en root avec <code>chown</code> ou <code>chmod</code>.</p>
+      </details>
+      <details class="callout">
+        <summary><strong>403 Forbidden</strong></summary>
+        <p>Apache (utilisateur <code>www-data</code>) ne peut pas atteindre ou lire le fichier : il manque le droit <code>x</code> sur un dossier parent (<code>chmod o+x</code>), le droit <code>r</code> sur le fichier, ou une section <code>&lt;Directory&gt;</code> avec <code>Require all granted</code>.</p>
+      </details>
+      <details class="callout">
+        <summary><strong>Ma modification de configuration n'a aucun effet</strong></summary>
+        <p>Apache ne relit sa configuration qu'au <code>systemctl reload apache2</code>. Une nouvelle configuration dans <code>conf-available</code> doit aussi être activée avec <code>a2enconf</code>.</p>
+      </details>
+      <details class="callout">
+        <summary><strong>Job for apache2.service failed</strong></summary>
+        <p>Erreur de syntaxe dans un fichier de configuration : lance <code>apache2ctl configtest</code> pour trouver la ligne fautive.</p>
+      </details>
+
+      <h2>Quiz : quelle commande ?</h2>
+      <div class="question" id="quiz-cmd">
+        <p class="q-titre"><span class="q-compte"></span></p>
+        <p class="q-enonce"></p>
+        <form>
+          <input type="text" spellcheck="false" autocomplete="off" autocapitalize="off" aria-label="Commande" placeholder="Tape la commande" style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" />
+          <button class="btn" type="submit">Vérifier</button>
+        </form>
+        <p class="feedback" aria-live="polite"></p>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      R1.13 Hébergement - BUT MMI 1 · IUT de Béziers · TP3 Serveur web
+      Apache
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/memo.js"></script>
+  </body>
+</html>

@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Livrable - R1.13 TP3</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect x=%2716%27 y=%2710%27 width=%2768%27 height=%2780%27 rx=%278%27 fill=%27%231c2333%27/%3E%3Crect x=%2726%27 y=%2722%27 width=%2748%27 height=%2712%27 rx=%273%27 fill=%27%23dd4814%27/%3E%3Crect x=%2726%27 y=%2742%27 width=%2748%27 height=%2712%27 rx=%273%27 fill=%27%232f5fd9%27/%3E%3Ccircle cx=%2734%27 cy=%2772%27 r=%276%27 fill=%27%236ee7a8%27/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-page="livrable">
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <header class="site-header">
+      <nav class="nav-wrap">
+        <a class="brand" href="index.html"
+          ><img src="img/logo_iut.jpg" alt="" />
+          <span
+            >R1.13 - Hébergement
+            <small>TP3 · Serveur web Apache</small></span
+          ><img src="img/logo_mmi.jpg" alt="" />
+        </a>
+        <div class="site-nav">
+          <a href="index.html" data-nav="index">Accueil</a>
+          <a href="tp.html" data-nav="tp">TP</a>
+          <a href="livrable.html" data-nav="livrable">Livrable</a>
+          <a href="memo.html" data-nav="memo">Mémo</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="contenu">
+      <p class="eyebrow">Partie 5 · Sur Moodle</p>
+      <h1>Livrable du TP</h1>
+      <p class="lede">
+        Le livrable doit prouver que votre serveur Apache fonctionne et que
+        vous avez compris chaque étape de sa configuration. Remplissez cette page,
+        puis générez <strong>un seul fichier PDF</strong> à déposer sur
+        Moodle : il rassemble votre identité, vos réponses et vos deux
+        captures d'écran.
+      </p>
+
+      <ol class="actions" id="etat-livrable">
+        <li data-etat="identite"><span><strong>Nom et prénom</strong> renseignés.</span></li>
+        <li data-etat="capture1"><span><strong>Capture 1 (page d'accueil)</strong> déposée.</span></li>
+        <li data-etat="capture2"><span><strong>Capture 2 (alias)</strong> déposée.</span></li>
+        <li data-etat="capture3"><span><strong>Capture 3 (zone admin)</strong> déposée.</span></li>
+        <li data-etat="capture4"><span><strong>Capture 4 (erreur 404 personnalisée)</strong> déposée.</span></li>
+        <li data-etat="reponses"><span><strong>Réponses aux 7 questions</strong> (Q1 à Q7) rédigées : <span id="reponses-compteur"></span>.</span></li>
+      </ol>
+
+      <h2>Barème</h2>
+      <p>
+        Le compte rendu est noté sur <strong>20 points</strong>. Les points de
+        chaque question et de chaque capture sont rappelés ci-dessous, à côté
+        de leur intitulé.
+      </p>
+      <div class="table-scroll">
+        <table class="bareme">
+          <thead><tr><th>Partie</th><th>Détail</th><th class="pts">Points</th></tr></thead>
+          <tbody>
+            <tr><td>Installation et accès au site</td><td>Q1 (1) · Q2 (1,5) · Q3 (2)</td><td class="pts">4,5 pts</td></tr>
+            <tr><td>Droits, alias et logs</td><td>Q4 (2) · Q5 (1,5) · Q6 (2) · Q7 (2)</td><td class="pts">7,5 pts</td></tr>
+            <tr><td>Captures d'écran</td><td>Accueil (2) · Alias (2) · Zone admin (2) · Erreur 404 (2)</td><td class="pts">8 pts</td></tr>
+          </tbody>
+          <tfoot><tr><td colspan="2">Total</td><td class="pts">20 pts</td></tr></tfoot>
+        </table>
+      </div>
+      <p class="hint" style="color: var(--text-muted); font-size: 0.9rem">
+        Un élément manquant (réponse vide ou capture absente) ne rapporte aucun
+        point. Les activités d'entraînement du site ne sont pas notées.
+      </p>
+
+      <h2>1. Mon identité</h2>
+      <p>
+        Vérifie bien l'orthographe : ton prénom et ton nom seront
+        <strong>verrouillés</strong> dès la génération du premier PDF et ne
+        pourront plus être modifiés sur ce poste.
+      </p>
+      <div class="grid cols-2 identite">
+        <div class="reponse">
+          <label for="prenom">Prénom</label>
+          <input id="prenom" type="text" autocomplete="given-name" />
+        </div>
+        <div class="reponse">
+          <label for="nom">Nom</label>
+          <input id="nom" type="text" autocomplete="family-name" />
+        </div>
+      </div>
+      <p class="identite-verrou" id="identite-verrou" hidden></p>
+
+      <h2>2. Mes captures d'écran</h2>
+      <p>
+        Les captures doivent montrer <strong>votre vraie machine
+        Killercoda</strong> (adresse du tunnel visible dans la barre
+        d'adresse), pas le bac à sable du site, et être enregistrées au
+        format <strong>JPG</strong>.
+      </p>
+      <details class="callout">
+        <summary><strong>Comment faire une capture en JPG ?</strong></summary>
+        <ul>
+          <li>
+            <strong>Windows</strong> : <kbd>Windows</kbd> + <kbd>Maj</kbd> +
+            <kbd>S</kbd>, sélectionner la zone du navigateur, cliquer sur la
+            notification puis sur l'icône d'enregistrement, et choisir le type
+            <em>JPG</em>.
+          </li>
+          <li>
+            <strong>macOS</strong> : <kbd>⌘</kbd> + <kbd>Maj</kbd> +
+            <kbd>4</kbd>, puis <kbd>Espace</kbd> et cliquer sur la fenêtre du
+            navigateur. Le Mac enregistre en PNG : ouvrir l'image dans Aperçu,
+            puis <em>Fichier &gt; Exporter…</em> au format <em>JPEG</em>.
+          </li>
+        </ul>
+        <p>
+          L'adresse complète (barre d'adresse) et le contenu de la page doivent
+          être lisibles.
+        </p>
+      </details>
+      <div class="grid cols-2">
+        <div class="capture" data-capture="capture1">
+          <h3 data-pts="2 pts">Capture 1 · Page d'accueil</h3>
+          <p class="rappel">Votre navigateur affichant la page « Site TP MMI - [Votre Nom] », avec l'adresse du tunnel Killercoda visible.</p>
+          <label class="depot">
+            <input type="file" accept=".jpg,.jpeg,image/jpeg" />
+            <span class="depot-texte">📷 Choisir ou glisser ici une image <strong>JPG</strong></span>
+            <img class="depot-apercu" alt="Aperçu de la capture 1" hidden />
+          </label>
+          <div class="capture-pied">
+            <span class="capture-etat" aria-live="polite">Aucune capture</span>
+            <button type="button" class="popup-btn" data-retirer hidden>Retirer</button>
+          </div>
+        </div>
+        <div class="capture" data-capture="capture2">
+          <h3 data-pts="2 pts">Capture 2 · Alias</h3>
+          <p class="rappel">La page « Ceci est un Alias » affichée à l'adresse se terminant par <code>/test</code>.</p>
+          <label class="depot">
+            <input type="file" accept=".jpg,.jpeg,image/jpeg" />
+            <span class="depot-texte">📷 Choisir ou glisser ici une image <strong>JPG</strong></span>
+            <img class="depot-apercu" alt="Aperçu de la capture 2" hidden />
+          </label>
+          <div class="capture-pied">
+            <span class="capture-etat" aria-live="polite">Aucune capture</span>
+            <button type="button" class="popup-btn" data-retirer hidden>Retirer</button>
+          </div>
+        </div>
+        <div class="capture" data-capture="capture3">
+          <h3 data-pts="2 pts">Capture 3 · Zone admin</h3>
+          <p class="rappel">La page « ZONE SECRÈTE » affichée après authentification à l'adresse <code>/admin</code>.</p>
+          <label class="depot">
+            <input type="file" accept=".jpg,.jpeg,image/jpeg" />
+            <span class="depot-texte">📷 Choisir ou glisser ici une image <strong>JPG</strong></span>
+            <img class="depot-apercu" alt="Aperçu de la capture 3" hidden />
+          </label>
+          <div class="capture-pied">
+            <span class="capture-etat" aria-live="polite">Aucune capture</span>
+            <button type="button" class="popup-btn" data-retirer hidden>Retirer</button>
+          </div>
+        </div>
+        <div class="capture" data-capture="capture4">
+          <h3 data-pts="2 pts">Capture 4 · Erreur 404 personnalisée</h3>
+          <p class="rappel">Votre page d'erreur personnalisée affichée pour une adresse inexistante (ex : <code>/toto.html</code>).</p>
+          <label class="depot">
+            <input type="file" accept=".jpg,.jpeg,image/jpeg" />
+            <span class="depot-texte">📷 Choisir ou glisser ici une image <strong>JPG</strong></span>
+            <img class="depot-apercu" alt="Aperçu de la capture 4" hidden />
+          </label>
+          <div class="capture-pied">
+            <span class="capture-etat" aria-live="polite">Aucune capture</span>
+            <button type="button" class="popup-btn" data-retirer hidden>Retirer</button>
+          </div>
+        </div>
+      </div>
+
+      <h2>3. Mes réponses</h2>
+      <p>
+        Vos réponses sont enregistrées automatiquement dans ce navigateur (sur
+        cet ordinateur uniquement). Elles ne peuvent être ni sélectionnées, ni
+        copiées, ni collées : rédigez-les vous-même. Seule la ligne du journal
+        de Q7 peut être collée depuis le terminal.
+      </p>
+      <div class="scenario-toolbar">
+        <strong>Rédaction</strong>
+        <div class="progress"><span data-progress></span></div>
+        <span class="progress-text" id="reponses-progression"></span>
+      </div>
+        <div class="reponse" id="bloc-q1" data-partie="0">
+          <label for="q1" data-pts="1 pt">Q1. Mise à jour des paquets</label>
+          <p class="rappel">Quelle commande avez-vous utilisée pour mettre à jour l'index des paquets ? <a href="tp.html">Voir dans le TP</a></p>
+          <textarea id="q1" rows="3"></textarea>
+        </div>
+        <div class="reponse" id="bloc-q2" data-partie="0">
+          <label for="q2" data-pts="1,5 pts">Q2. Le statut « active (running) »</label>
+          <p class="rappel">Que signifie le statut « active (running) » affiché par systemctl status apache2 ? <a href="tp.html">Voir dans le TP</a></p>
+          <textarea id="q2" rows="3"></textarea>
+        </div>
+        <div class="reponse" id="bloc-q3" data-partie="0">
+          <label for="q3" data-pts="2 pts">Q3. L'URL du tunnel Killercoda</label>
+          <p class="rappel">Pourquoi l'URL du site (https://xxxx-80.spca.r.killercoda.com) est-elle complexe, et n'est-elle pas localhost ? <a href="tp.html">Voir dans le TP</a></p>
+          <textarea id="q3" rows="3"></textarea>
+        </div>
+        <div class="reponse" id="bloc-q4" data-partie="1">
+          <label for="q4" data-pts="2 pts">Q4. Création de fichier refusée</label>
+          <p class="rappel">Quel message obtenez-vous avec touch /var/www/html/monfichier.html en tant qu'etudiant ? Pourquoi (ls -ld /var/www/html) ? <a href="tp.html">Voir dans le TP</a></p>
+          <textarea id="q4" rows="3"></textarea>
+        </div>
+        <div class="reponse" id="bloc-q5" data-partie="1">
+          <label for="q5" data-pts="1,5 pts">Q5. La commande chown</label>
+          <p class="rappel">Quelle est la commande exacte utilisée pour donner /var/www/html à l'utilisateur etudiant ? <a href="tp.html">Voir dans le TP</a></p>
+          <textarea id="q5" rows="3"></textarea>
+        </div>
+        <div class="reponse" id="bloc-q6" data-partie="1">
+          <label for="q6" data-pts="2 pts">Q6. chmod o+x /home/etudiant</label>
+          <p class="rappel">Expliquer ce que fait la commande chmod o+x /home/etudiant (et pourquoi elle corrige l'erreur 403). <a href="tp.html">Voir dans le TP</a></p>
+          <textarea id="q6" rows="3"></textarea>
+        </div>
+        <div class="reponse" id="bloc-q7" data-partie="1">
+          <label for="q7log" data-pts="2 pts">Q7. Analyse d'une ligne du journal d'accès</label>
+          <p class="rappel">Copier-coller la ligne de votre erreur 404, puis expliquer le code « 404 » et l'information « Mozilla/5.0... ». <a href="tp.html">Voir dans le TP</a></p>
+          <p class="rappel" style="margin-top: 0.4rem"><strong>Ligne du journal</strong> (collée depuis le terminal Killercoda : le collage est autorisé ici)</p>
+          <textarea id="q7log" rows="2" data-collage data-prefixe="Ligne du journal" spellcheck="false" style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.82rem"></textarea>
+          <p class="rappel" style="margin-top: 0.6rem"><strong>Explication</strong> du code 404 et de « Mozilla/5.0... »</p>
+          <textarea id="q7" rows="3" data-prefixe="Explication"></textarea>
+        </div>
+
+      <h2>4. Mon compte rendu PDF</h2>
+      <div class="callout">
+        <p>
+          <strong>Rendu sur Moodle :</strong> déposez ce fichier PDF dans le
+          dépôt prévu. Le PDF reprend la mise en page des certificats des exercices
+          JavaScript : vos statistiques, vos réponses puis vos deux captures.
+          Il est <strong>verrouillé</strong> (impression seule). S'il manque
+          une réponse ou une capture, il est quand même généré, mais porte la
+          mention <strong>« INCOMPLET »</strong>.
+        </p>
+      </div>
+      <div class="barre-actions">
+        <button type="button" class="btn" id="generer-pdf">📄 Générer mon compte rendu PDF</button>
+      </div>
+      <p id="pdf-info" aria-live="polite" class="feedback"></p>
+    </main>
+
+    <footer class="site-footer">
+      R1.13 Hébergement - BUT MMI 1 · IUT de Béziers · TP3 Serveur web
+      Apache
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/vendor/jspdf.umd.min.js"></script>
+    <script src="js/certificat-logos.js"></script>
+    <script src="js/compte-rendu.js"></script>
+    <script src="js/livrable.js"></script>
+  </body>
+</html>

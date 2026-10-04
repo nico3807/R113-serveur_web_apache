@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP - R1.13 TP3 Serveur web Apache</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect x=%2716%27 y=%2710%27 width=%2768%27 height=%2780%27 rx=%278%27 fill=%27%231c2333%27/%3E%3Crect x=%2726%27 y=%2722%27 width=%2748%27 height=%2712%27 rx=%273%27 fill=%27%23dd4814%27/%3E%3Crect x=%2726%27 y=%2742%27 width=%2748%27 height=%2712%27 rx=%273%27 fill=%27%232f5fd9%27/%3E%3Ccircle cx=%2734%27 cy=%2772%27 r=%276%27 fill=%27%236ee7a8%27/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-page="tp">
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <header class="site-header">
+      <nav class="nav-wrap">
+        <a class="brand" href="index.html"
+          ><img src="img/logo_iut.jpg" alt="" />
+          <span
+            >R1.13 - Hébergement
+            <small>TP3 · Serveur web Apache</small></span
+          ><img src="img/logo_mmi.jpg" alt="" />
+        </a>
+        <div class="site-nav">
+          <a href="index.html" data-nav="index">Accueil</a>
+          <a href="tp.html" data-nav="tp">TP</a>
+          <a href="livrable.html" data-nav="livrable">Livrable</a>
+          <a href="memo.html" data-nav="memo">Mémo</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="contenu">
+      <p class="eyebrow">TP3 · Administration d'un serveur distant</p>
+      <h1>Installer et configurer Apache</h1>
+      <p class="lede">
+        Suivez les huit parties sur <strong>Killercoda</strong>. Le bac à
+        sable du site reproduit la machine pour vous entraîner : chaque
+        action réussie y est cochée automatiquement. Les questions
+        <strong>Q1 à Q7</strong> sont à rédiger dans la page
+        <a href="livrable.html">Livrable</a>.
+      </p>
+
+      <div class="scenario-toolbar">
+        <strong>Progression</strong>
+        <div class="progress"><span data-progress></span></div>
+        <span class="progress-text" data-progress-text></span>
+        <span class="progress-text" id="missions-compte"></span>
+      </div>
+
+      <div class="atelier tp">
+        <div>
+      <section class="scenario" id="etape-1" data-etape>
+        <div class="scenario-head" role="button" tabindex="0" aria-expanded="false">
+          <input type="checkbox" class="scenario-check" aria-label="Partie 1 terminée" />
+          <span class="scenario-num">1</span>
+          <h3>Prise en main de l'environnement</h3>
+          <span class="scenario-meta">10 min</span>
+          <span class="scenario-caret" aria-hidden="true">▶</span>
+        </div>
+        <div class="scenario-body">
+          <div class="callout warn"><p><strong>Attention :</strong> l'environnement est éphémère. Si vous fermez l'onglet, vous perdez votre travail. Restez sur la page jusqu'à la fin du TP (session de 60 minutes).</p></div>
+          <ol class="actions">
+            <li><span>Ouvrir votre navigateur et aller sur l'URL suivante : <a class="etape-lien" href="https://killercoda.com/playgrounds/scenario/ubuntu" target="_blank" rel="noopener">killercoda.com/playgrounds/scenario/ubuntu</a></span></li>
+            <li><span>Se connecter (via Google, GitHub ou e-mail). Si vous utilisez votre adresse universitaire, vérifiez vos mails : un lien de connexion vous a été envoyé.</span></li>
+          </ol>
+          <figure class="etape-figure" style="max-width: 640px"><img src="img/image1.png" alt="Courriel de Killercoda contenant le lien « CLICK TO LOGIN », valable une heure." /></figure>
+          <figure class="etape-figure"><img src="img/image2.png" alt="Interface Killercoda : à gauche la présentation « Ubuntu 24.04 » et le bouton START, à droite le terminal avec l'invite ubuntu:~$ et la durée restante de 60 minutes." /></figure>
+          <p>Une fois chargé, un terminal noir apparaît.</p>
+          <ol class="actions">
+            <li data-mission="whoami"><span>Taper la commande suivante pour vérifier qui vous êtes : <code>whoami</code>. Notez que vous êtes <strong>root</strong> : c'est le « super-administrateur ». Sur cet outil, vous avez tous les droits par défaut.</span></li>
+            <li data-mission="osrelease"><span>Vérifier la version du système : <code>cat /etc/os-release</code></span></li>
+          </ol>
+        </div>
+      </section>
+      <section class="scenario" id="etape-2" data-etape>
+        <div class="scenario-head" role="button" tabindex="0" aria-expanded="false">
+          <input type="checkbox" class="scenario-check" aria-label="Partie 2 terminée" />
+          <span class="scenario-num">2</span>
+          <h3>Installation du service web</h3>
+          <span class="scenario-meta">15 min</span>
+          <span class="scenario-caret" aria-hidden="true">▶</span>
+        </div>
+        <div class="scenario-body">
+          <p>L'objectif est d'installer le serveur HTTP Apache.</p>
+          <ol class="actions">
+            <li data-mission="update"><span><strong>Mise à jour :</strong> avant toute installation, mettre à jour l'index des paquets disponibles.</span></li>
+          </ol>
+          <div class="q-sujet">
+            <p><span class="q-num">Q1</span>Quelle commande avez-vous utilisée pour mettre à jour l'index des paquets ?</p>
+            <p class="q-lien"><a href="livrable.html#q1">Rédiger ma réponse &rarr;</a></p>
+          </div>
+          <ol class="actions">
+            <li data-mission="install"><span><strong>Installation :</strong> installer le paquet <code>apache2</code>. La commande pour installer le serveur Apache 2 sur une distribution de type Debian ou Ubuntu (comme celle utilisée sur Killercoda) est : <code>apt install apache2</code></span></li>
+            <li data-mission="status"><span><strong>Vérification du service :</strong> vérifier que le service est bien lancé avec la commande <code>systemctl status apache2</code>.</span></li>
+          </ol>
+          <figure class="etape-figure" style="max-width: 420px"><img src="img/image3.png" alt="Sortie de systemctl status apache2 : service chargé et activé, Active: active (running), processus apache2 listés, puis lines 1-16/16 (END)." /></figure>
+          <div class="q-sujet">
+            <p><span class="q-num">Q2</span>Que signifie le statut « active (running) » ?</p>
+            <p class="q-lien"><a href="livrable.html#q2">Rédiger ma réponse &rarr;</a></p>
+          </div>
+          <ol class="actions">
+            <li data-mission="pager"><span>Appuyer sur la touche <kbd>q</kbd> pour sortir du mode de visualisation du statut.</span></li>
+          </ol>
+        </div>
+      </section>
+      <section class="scenario" id="etape-3" data-etape>
+        <div class="scenario-head" role="button" tabindex="0" aria-expanded="false">
+          <input type="checkbox" class="scenario-check" aria-label="Partie 3 terminée" />
+          <span class="scenario-num">3</span>
+          <h3>Accéder à votre site web (exposition)</h3>
+          <span class="scenario-meta">15 min</span>
+          <span class="scenario-caret" aria-hidden="true">▶</span>
+        </div>
+        <div class="scenario-body">
+          <p>Sur une machine locale, vous taperiez <code>localhost</code> dans le navigateur. Ici, le serveur est distant : Killercoda permet d'ouvrir un « tunnel » pour voir le site.</p>
+          <ol class="actions">
+            <li><span><strong>Repérer l'outil de ports :</strong> cliquer, dans l'interface de Killercoda, sur le menu en haut à droite, à côté de l'horloge du temps restant dans la session. Puis sélectionner « Traffic / Ports ».</span></li>
+            <li data-mission="port"><span><strong>Ouvrir le port 80</strong> (le port standard du web HTTP) : un nouvel onglet s'ouvre avec la page par défaut d'Apache. Dans le bac à sable : onglet « Traffic / Ports ».</span></li>
+          </ol>
+          <div class="q-sujet">
+            <p><span class="q-num">Q3</span>Regarder l'URL dans la barre d'adresse de ce nouvel onglet. Ce n'est pas <code>localhost</code>. Expliquer brièvement pourquoi l'URL est complexe (ex : <code>https://xxxx-80.spca.r.killercoda.com</code>).</p>
+            <p class="q-lien"><a href="livrable.html#q3">Rédiger ma réponse &rarr;</a></p>
+          </div>
+          <p>Laisser cet onglet ouvert : il servira à vérifier votre travail.</p>
+        </div>
+      </section>
+      <section class="scenario" id="etape-4" data-etape>
+        <div class="scenario-head" role="button" tabindex="0" aria-expanded="false">
+          <input type="checkbox" class="scenario-check" aria-label="Partie 4 terminée" />
+          <span class="scenario-num">4</span>
+          <h3>Modification de contenu et droits</h3>
+          <span class="scenario-meta">15 min</span>
+          <span class="scenario-caret" aria-hidden="true">▶</span>
+        </div>
+        <div class="scenario-body">
+          <p>Puisque vous êtes root par défaut, vous avez tous les droits. Pour simuler une situation réelle et comprendre les permissions, nous allons créer un utilisateur standard.</p>
+          <ol class="actions">
+            <li data-mission="adduser"><span><strong>Création d'un utilisateur :</strong> créer un utilisateur nommé <code>etudiant</code> : <code>adduser etudiant</code> (remplir les infos demandées ou appuyer sur Entrée).</span></li>
+            <li data-mission="su"><span><strong>Tentative de modification (simulation d'erreur) :</strong> se connecter en tant que cet utilisateur : <code>su - etudiant</code></span></li>
+            <li data-mission="refus"><span>Tenter de créer un fichier dans le dossier du site web : <code>touch /var/www/html/monfichier.html</code></span></li>
+            <li data-mission="lsld"><span>Analyser les droits du dossier : <code>ls -ld /var/www/html</code></span></li>
+          </ol>
+          <div class="q-sujet">
+            <p><span class="q-num">Q4</span>Quel message obtenez-vous ? Pourquoi ? (Aidez-vous de la commande <code>ls -ld /var/www/html</code> pour analyser les droits.)</p>
+            <p class="q-lien"><a href="livrable.html#q4">Rédiger ma réponse &rarr;</a></p>
+          </div>
+          <ol class="actions">
+            <li data-mission="chown"><span><strong>Correction des droits :</strong> revenir en mode administrateur en tapant <code>exit</code>, puis changer le propriétaire du dossier <code>/var/www/html</code> pour qu'il appartienne à l'utilisateur <code>etudiant</code> (commande <code>chown</code>).</span></li>
+          </ol>
+          <div class="q-sujet">
+            <p><span class="q-num">Q5</span>Quelle est la commande exacte utilisée ?</p>
+            <p class="q-lien"><a href="livrable.html#q5">Rédiger ma réponse &rarr;</a></p>
+          </div>
+          <ol class="actions">
+            <li data-mission="index"><span><strong>Modification validée :</strong> repasser en utilisateur <code>etudiant</code> (<code>su - etudiant</code>). Supprimer le fichier <code>index.html</code> existant et en créer un nouveau avec le contenu : <code>&lt;h1&gt;Site TP MMI - [Votre Nom]&lt;/h1&gt;</code></span></li>
+            <li data-mission="voir-index"><span>Actualiser votre onglet navigateur pour voir le résultat.</span></li>
+          </ol>
+          <div class="callout "><p><strong>Note :</strong> pour éditer un fichier en ligne de commande, utilisez l'éditeur <strong>nano</strong> : <code>nano /var/www/html/index.html</code>. Écrivez votre texte. Pour sauvegarder : <kbd>Ctrl</kbd> + <kbd>O</kbd> puis <kbd>Entrée</kbd>. Pour quitter : <kbd>Ctrl</kbd> + <kbd>X</kbd>.</p></div>
+          <p>Résultat à obtenir :</p>
+          <figure class="etape-figure" style="max-width: 520px"><img src="img/image4.png" alt="Navigateur affichant le titre « Site TP MMI - MAURIN N » à l'adresse du tunnel Killercoda." /></figure>
+        </div>
+      </section>
+      <section class="scenario" id="etape-5" data-etape>
+        <div class="scenario-head" role="button" tabindex="0" aria-expanded="false">
+          <input type="checkbox" class="scenario-check" aria-label="Partie 5 terminée" />
+          <span class="scenario-num">5</span>
+          <h3>Création d'un alias</h3>
+          <span class="scenario-meta">20 min</span>
+          <span class="scenario-caret" aria-hidden="true">▶</span>
+        </div>
+        <div class="scenario-body">
+          <p>Nous voulons que l'adresse <code>.../test</code> pointe vers un dossier qui n'est pas dans <code>/var/www/html</code>.</p>
+          <ol class="actions">
+            <li data-mission="dossier"><span><strong>Préparation</strong> (en tant qu'utilisateur <code>etudiant</code>) : créer un dossier <code>~/dossier_test</code> dans votre répertoire personnel, puis un fichier <code>index.html</code> dedans avec le texte « Ceci est un Alias ». Noter le chemin absolu de ce dossier (<code>pwd</code>) : probablement <code>/home/etudiant/dossier_test</code>.</span></li>
+            <li data-mission="conf"><span><strong>Configuration Apache :</strong> revenir en root (<code>exit</code>), se déplacer dans <code>/etc/apache2/conf-available/</code> et créer un fichier <code>mon_alias.conf</code> avec nano, contenant la configuration ci-dessous (adapter le chemin si besoin).</span></li>
+          </ol>
+          <pre class="conf"><code>Alias /test /home/etudiant/dossier_test
+&lt;Directory /home/etudiant/dossier_test&gt;
+    Require all granted
+&lt;/Directory&gt;</code></pre>
+          <ol class="actions">
+            <li data-mission="a2enconf"><span><strong>Activation :</strong> activer la configuration : <code>a2enconf mon_alias</code></span></li>
+            <li data-mission="reload-alias"><span>Recharger Apache : <code>systemctl reload apache2</code></span></li>
+            <li data-mission="alias-ok"><span>Tester l'URL de votre site en ajoutant <code>/test</code> à la fin.</span></li>
+          </ol>
+          <div class="callout warn"><p>Si vous avez une erreur <strong>Forbidden (403)</strong>, c'est souvent car le dossier <code>/home/etudiant</code> n'est pas traversable. La commande <code>chmod o+x /home/etudiant</code> corrige cela.</p></div>
+          <div class="q-sujet">
+            <p><span class="q-num">Q6</span>Expliquer ce que fait la commande <code>chmod o+x /home/etudiant</code>.</p>
+            <p class="q-lien"><a href="livrable.html#q6">Rédiger ma réponse &rarr;</a></p>
+          </div>
+          <figure class="etape-figure" style="max-width: 520px"><img src="img/image5.png" alt="Navigateur affichant « Ceci est un Alias » à l'adresse du tunnel terminée par /test/." /></figure>
+        </div>
+      </section>
+      <section class="scenario" id="etape-6" data-etape>
+        <div class="scenario-head" role="button" tabindex="0" aria-expanded="false">
+          <input type="checkbox" class="scenario-check" aria-label="Partie 6 terminée" />
+          <span class="scenario-num">6</span>
+          <h3>Logs et diagnostic</h3>
+          <span class="scenario-meta">10 min</span>
+          <span class="scenario-caret" aria-hidden="true">▶</span>
+        </div>
+        <div class="scenario-body">
+          <p>Un développeur doit savoir pourquoi son site plante.</p>
+          <ol class="actions">
+            <li data-mission="tail"><span><strong>Observation en temps réel :</strong> s'assurer d'être root, puis lancer la surveillance du journal d'accès : <code>tail -f /var/log/apache2/access.log</code></span></li>
+            <li data-mission="log404"><span><strong>Génération de trafic :</strong> retourner sur votre navigateur web, actualiser la page du site, puis essayer d'accéder à une page inexistante (ex : <code>/toto.html</code>).</span></li>
+            <li><span><strong>Analyse :</strong> retourner sur le terminal : des lignes défilent. Faire <kbd>Ctrl</kbd> + <kbd>C</kbd> pour arrêter la surveillance.</span></li>
+          </ol>
+          <div class="q-sujet">
+            <p><span class="q-num">Q7</span>Copier-coller la ligne correspondant à votre erreur 404 (page inexistante). À quoi correspondent le code « 404 » et l'information « Mozilla/5.0... » visible sur la ligne ?</p>
+            <p class="q-lien"><a href="livrable.html#q7">Rédiger ma réponse &rarr;</a></p>
+          </div>
+        </div>
+      </section>
+      <section class="scenario" id="etape-7" data-etape>
+        <div class="scenario-head" role="button" tabindex="0" aria-expanded="false">
+          <input type="checkbox" class="scenario-check" aria-label="Partie 7 terminée" />
+          <span class="scenario-num">7</span>
+          <h3>Sécuriser un dossier (authentification)</h3>
+          <span class="scenario-meta">20 min</span>
+          <span class="scenario-caret" aria-hidden="true">▶</span>
+        </div>
+        <div class="scenario-body">
+          <p><strong>Contexte :</strong> vous développez une interface d'administration (<code>/admin</code>). Elle ne doit pas être accessible à tout le monde. Nous allons mettre en place une « Basic Authentication » via un fichier <code>.htaccess</code>.</p>
+          <ol class="actions">
+            <li data-mission="admin"><span><strong>Préparation :</strong> dans <code>/var/www/html</code>, créer un dossier nommé <code>admin</code> et, à l'intérieur, un fichier <code>index.html</code> contenant « ZONE SECRÈTE ».</span></li>
+            <li data-mission="override"><span><strong>Configuration globale :</strong> par défaut, Apache ignore les fichiers <code>.htaccess</code> pour des raisons de performance. Éditer <code>nano /etc/apache2/apache2.conf</code>, chercher le bloc <code>&lt;Directory /var/www/&gt;</code>, changer <code>AllowOverride None</code> en <code>AllowOverride All</code>, sauvegarder et recharger Apache (<code>systemctl reload apache2</code>).</span></li>
+            <li data-mission="htaccess"><span><strong>Protection locale :</strong> dans le dossier <code>/var/www/html/admin</code>, créer un fichier nommé <code>.htaccess</code> avec la configuration ci-dessous.</span></li>
+          </ol>
+          <pre class="conf"><code>AuthType Basic
+AuthName "Zone Admin"
+AuthUserFile /etc/apache2/.htpasswd
+Require valid-user</code></pre>
+          <ol class="actions">
+            <li data-mission="htpasswd"><span><strong>Création des identifiants :</strong> créer le fichier de mots de passe chiffrés avec l'utilitaire htpasswd : <code>htpasswd -c /etc/apache2/.htpasswd monlogin</code> (remplacer <code>monlogin</code> par votre prénom), puis définir un mot de passe.</span></li>
+            <li data-mission="auth-ok"><span><strong>Test :</strong> accéder à <code>.../admin</code> via le navigateur. Une fenêtre de connexion doit apparaître : renseigner le nom d'utilisateur et le mot de passe créés précédemment.</span></li>
+          </ol>
+          <figure class="etape-figure" style="max-width: 420px"><img src="img/image6.png" alt="Fenêtre « Se connecter » du navigateur demandant un nom d'utilisateur et un mot de passe pour l'adresse du tunnel Killercoda." /></figure>
+          <p>Votre page secrète doit s'afficher !</p>
+          <figure class="etape-figure" style="max-width: 520px"><img src="img/image7.png" alt="Page affichant « ZONE SECRÈTE » après authentification." /></figure>
+        </div>
+      </section>
+      <section class="scenario" id="etape-8" data-etape>
+        <div class="scenario-head" role="button" tabindex="0" aria-expanded="false">
+          <input type="checkbox" class="scenario-check" aria-label="Partie 8 terminée" />
+          <span class="scenario-num">8</span>
+          <h3>Personnalisation des erreurs (UX)</h3>
+          <span class="scenario-meta">15 min</span>
+          <span class="scenario-caret" aria-hidden="true">▶</span>
+        </div>
+        <div class="scenario-body">
+          <p><strong>Contexte :</strong> la page « 404 Not Found » par défaut d'Apache est austère et technique. En MMI, on soigne l'expérience utilisateur.</p>
+          <ol class="actions">
+            <li data-mission="oups"><span><strong>Création de la page :</strong> créer un fichier <code>/var/www/html/oups.html</code> avec un design sympa (un message « Perdu dans la Galaxie MMI ? » par exemple).</span></li>
+            <li data-mission="errordoc"><span><strong>Configuration :</strong> éditer le fichier de configuration du site par défaut <code>/etc/apache2/sites-available/000-default.conf</code> et, à l'intérieur du bloc <code>&lt;VirtualHost *:80&gt;</code>, ajouter la ligne <code>ErrorDocument 404 /oups.html</code>. Recharger Apache.</span></li>
+            <li data-mission="404perso"><span><strong>Application :</strong> tester une URL inexistante (ex : <code>.../toto.html</code>). Votre page personnalisée doit s'afficher à la place de l'erreur standard.</span></li>
+          </ol>
+          <p>Exemple :</p>
+          <figure class="etape-figure" style="max-width: 640px"><img src="img/image8.png" alt="Page d'erreur 404 personnalisée « Perdu dans la Galaxie MMI ? » avec une planète et une fusée, sur l'adresse /toto.html." /></figure>
+          <p style="text-align: center"><a class="btn" href="livrable.html">Préparer mon livrable &rarr;</a></p>
+        </div>
+      </section>
+        </div>
+        <div class="atelier-terminal">
+          <div class="bac" id="bac"></div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0.4rem 0 0">
+            Bac à sable simulé : rien n'est installé sur votre ordinateur. Pour
+            le livrable, utilisez la vraie machine Killercoda.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      R1.13 Hébergement - BUT MMI 1 · IUT de Béziers · TP3 Serveur web
+      Apache
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/bac-a-sable.js"></script>
+    <script src="js/tp.js"></script>
+  </body>
+</html>
